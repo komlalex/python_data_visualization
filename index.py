@@ -42,5 +42,29 @@ We can add labels to the axes to show what each axis represents using the
 plt.xlabel and plt.ylabel methods. 
 """
 plt.xlabel("Year") 
-plt.ylabel("Apple Yield")
+plt.ylabel("Yield (tons per hectare)") 
+
+"""Plotting Multiple Lines
+It's really easy to plot multiple lines in the same graph. Just invoke the 
+plt.plot multiple times. Let's compare the yields of apples vs oranges in Kanto.
+
+"""
+years = range(2000, 2012) 
+apples = [0.895, 0.91, 0.919, 0.926, 0.929, 0.931, 0.934, 0.936, 0.937, 0.9372, 0.939, 0.9342] 
+oranges = [0.962, 0.941, 0.930, 0.923, 0.918, 0.907, 0.904, 0.901, 0.898, 0.9, 0.896, 0.893] 
+
+plt.figure()
+plt.plot(years, apples) 
+plt.plot(years, oranges) 
+plt.ylabel("Yield (tons per hectare)")
+plt.xlabel("Year")
+
+"""Chart Title and Legend 
+To differentiate between multiple lines, we can include a legend 
+within the graph using the plt.legend function. We also give the entire 
+chart a title using the plt.title function. 
+""" 
+plt.title("Crop Yields in Kanto")
+plt.legend(["Apples", "Oranges"]) 
+
 plt.show()

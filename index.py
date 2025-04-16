@@ -212,8 +212,8 @@ number of observations that fall in each bin.
 As an example, let's visualize how the values of sepal width in the flowers 
 dataset are distributed. We can use the plt.hist function to create a histogram.
 """
-#flowers_df = sns.load_dataset("iris")  
-print(flowers_df.describe()) 
+flowers_df = sns.load_dataset("iris")  
+#print(flowers_df.describe()) 
 
 """ plt.figure(figsize=(12, 6))
 plt.title("Distribution of Sepal Width") 
@@ -235,13 +235,33 @@ plt.hist(flowers_df.sepal_width, bins=5)
  """
 import numpy as np 
 # Specifying the boundaries of each bin 
-plt.figure(figsize=(12, 6))
+""" plt.figure(figsize=(12, 6))
 plt.title("Distribution of Sepal Width") 
-plt.hist(flowers_df.sepal_width, bins=np.arange(2, 5, 0.25))  
+plt.hist(flowers_df.sepal_width, bins=np.arange(2, 5, 0.25))   """
 
 # Bins of unequal size 
-plt.figure(figsize=(12, 6))
+""" plt.figure(figsize=(12, 6))
 plt.title("Distribution of Sepal Width") 
-plt.hist(flowers_df.sepal_width, bins=[1, 3, 4, 4.5] )
+plt.hist(flowers_df.sepal_width, bins=[1, 3, 4, 4.5] ) """
 
+"""Multiple Histograms
+Similar to line charts, we can draw multiple histograms in a single 
+chart. We can reduce the opacity of each histogram, so the bars of one histogram
+don't hide the bars for others. 
+
+Let's draw seperate histograms for each flower""" 
+setosa_df = flowers_df[flowers_df.species == "setosa"] 
+versicolor_df = flowers_df[flowers_df.species == "versicolor"]
+virginica_df = flowers_df[flowers_df.species == "virginica"]  
+sns.set_style("darkgrid")
+""" plt.figure(figsize=(12, 6)) 
+plt.title("Distribution of Sepal Width")
+plt.hist(setosa_df.sepal_width, alpha=0.4, bins=np.arange(2, 5, 0.25))
+plt.hist(versicolor_df.sepal_width, alpha=0.4, bins=np.arange(2, 5, 0.25)) 
+plt.legend(["Setosa", "Versicolor"]) """
+"""We can also stack multiple histograms on top of one another""" 
+plt.figure(figsize=(12, 6)) 
+plt.title("Distribution of Sepal Width")
+plt.hist([setosa_df.sepal_width, versicolor_df.sepal_width, virginica_df.sepal_width] , alpha=0.4, bins=np.arange(2, 5, 0.25), stacked=True)
+plt.legend(["Setosa", "Versicolor","Virginica"])
 plt.show()

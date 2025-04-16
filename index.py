@@ -118,7 +118,7 @@ An easy way to make your charts look beautiful is to use default
 styles provided in the Seaborn library. These can be applied using the 
 sns.set_style function."""
 
-sns.set_style("whitegrid") 
+""" sns.set_style("whitegrid") 
 plt.figure(figsize=(12, 12))
 plt.plot(years, apples, "s-b") 
 plt.plot(years, oranges, "o--r") 
@@ -134,5 +134,52 @@ plt.plot(years, oranges, "o--r")
 plt.ylabel("Yield (tons per hectare)")
 plt.xlabel("Year") 
 plt.title("Crop Yields in Kanto")
-plt.legend(["Apples", "Oranges"])
+plt.legend(["Apples", "Oranges"])  """
+
+"""You can also edit default styles directly by modifying the 
+matplotlib.rcParams dictionary.""" 
+""" import matplotlib 
+matplotlib.rcParams["font.size"] = 14  
+matplotlib.rcParams["figure.figsize"] = (9, 5)
+matplotlib.rcParams["figure.facecolor"] = "#33000099" 
+plt.figure()
+plt.plot(years, apples, "s-b") 
+plt.plot(years, oranges, "o--r") 
+plt.ylabel("Yield (tons per hectare)")
+plt.xlabel("Year") 
+plt.title("Crop Yields in Kanto")
+plt.legend(["Apples", "Oranges"]) 
+ """  
+
+"""SCATTER PLOT  
+In scatter plot, the values of 2 variables are plotted as 
+a point on a 2-dimensional grid. Additionally, you can also use a third 
+varibable to determine the size or color of the points. Let's try out an 
+example.
+
+The iris flower dataset provides samples measurements of sepals and 
+petals for 3 species of flowers. The Iris dataset is included with the 
+Seaborn library, and can be loaded as a Pandas data frame
+""" 
+flowers_df = sns.load_dataset("iris") 
+print(flowers_df.species.unique()) 
+
+"""Let's visualoze the relationship between the sepal length and sepal 
+width. Our first instinct might be to create a line chart using plt.plot. 
+However, the output is not very informative as there are too many 
+combinations of the two properties within the dataset, and there doesn't seem 
+to be a simple relationship between them.
+""" 
+#plt.plot(flowers_df.sepal_length, flowers_df.sepal_width) 
+
+"""We can use a scatter plot to visualize how sepal length and 
+sepal width vary using the scatterplot function from seaborn (imported as sns)
+"""
+sns.scatterplot(x=flowers_df.sepal_length, y=flowers_df.sepal_width) 
+
+"""Adding Hues 
+Notice how the points in the above plot seem to form distinct clusters 
+with some outliers. We can color the dots using the flower species as a hue. 
+We can also make the points larger using the s argument.""" 
+sns.scatterplot(x=flowers_df.sepal_length, y=flowers_df.sepal_width, hue=flowers_df.species, s=100) 
 plt.show()

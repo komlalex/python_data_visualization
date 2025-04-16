@@ -316,11 +316,43 @@ was quite high on Fridays, and lower on Saturday.
 We can also specify a hue argument to compare bar plots side-by-side based 
 on a third feature, e.g. sex.
 """
-plt.figure()
-sns.barplot(x="day", y="total_bill", hue="sex", data=tips_df)  
+""" plt.figure()
+sns.barplot(x="day", y="total_bill", hue="sex", data=tips_df)   """
 
 """You can make the bars horizontal by simply switching the axes
 """
-plt.figure()
-sns.barplot(x="total_bill", y="day", hue="sex", data=tips_df)
+""" plt.figure()
+sns.barplot(x="total_bill", y="day", hue="sex", data=tips_df) """ 
+
+
+"""HEATMAP 
+A heatmap is used to visualize 2-dimensional data like a matrix, or table 
+using colors. The best way to understand it is by looking at an example. 
+We'll use another sample dataset from Seaborn, called "flights" to 
+visualize monthly passenger footfall at an airport over 12 years. 
+"""
+flights_df  = sns.load_dataset("flights").pivot(index="month", columns="year", values="passengers")
+print(flights_df) 
+
+"""flights_df is a matrix with one row for each month and one column for 
+each year. The values in the matrix show the number of passengers (in thousands) 
+that visited the airport in a specific month of a spific month. We can use the 
+sns.heatmap function to visualize the footfall at the airport.
+"""
+""" plt.figure(figsize=(12, 6)) 
+plt.title("No. of Passengers (1000s)")  
+sns.heatmap(flights_df)  """
+
+"""The brighter colors indicate a higher footfall. By looking at the graph, 
+we can infer two things: 
+* The footfall at the airport in any given year tends to be highest around 
+July & August. 
+* The footfall at the airport in any given month tends to grow year by year. 
+
+We can also display the actual values in each block by specifying 
+annot= True, and use the cmpa argument to change the color palet
+"""
+plt.figure(figsize=(12, 6))
+plt.title("No. of Passengers (1000s)")
+sns.heatmap(flights_df, fmt="d", annot=True, cmap="Blues")
 plt.show()

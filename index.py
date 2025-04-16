@@ -260,8 +260,67 @@ plt.hist(setosa_df.sepal_width, alpha=0.4, bins=np.arange(2, 5, 0.25))
 plt.hist(versicolor_df.sepal_width, alpha=0.4, bins=np.arange(2, 5, 0.25)) 
 plt.legend(["Setosa", "Versicolor"]) """
 """We can also stack multiple histograms on top of one another""" 
-plt.figure(figsize=(12, 6)) 
+""" plt.figure(figsize=(12, 6)) 
 plt.title("Distribution of Sepal Width")
 plt.hist([setosa_df.sepal_width, versicolor_df.sepal_width, virginica_df.sepal_width] , alpha=0.4, bins=np.arange(2, 5, 0.25), stacked=True)
-plt.legend(["Setosa", "Versicolor","Virginica"])
+plt.legend(["Setosa", "Versicolor","Virginica"]) """ 
+
+
+"""Bar Chart 
+Bar charts are quite similar to line charts, i.e they show a sequence of values, 
+however a bar is shown for each value rather, rather than points connected by lines.
+We can use the plt.bar function to draw a bar chart. """ 
+years = range(2000, 2006) 
+apples = [0.35, 0.6, 0.9, 0.8, 0.65, 0.8]
+oranges = [0.4, 0.8, 0.9, 0.7, 0.6, 0.8]  
+""" plt.figure()
+plt.bar(years, oranges)  
+plt.plot(years, oranges, "o--r") """
+
+"""Like histograms, bars can also be stacked on top of one another. We use 
+the bottom argument to to plt.bar to achieve this.
+"""
+""" plt.figure()
+plt.bar(years, apples) 
+plt.bar(years, oranges, bottom=apples) 
+plt.legend(["Apples", "Oranges"]) """ 
+
+"""Bar Plots with Averages
+Let's look at another sample dataset included with Seaborn, called "tips". 
+The dataset contains information about the sex, time of day, and tip amount 
+for customers visiting a restaurant over a week. 
+""" 
+tips_df = sns.load_dataset("tips") 
+
+"""
+We might want to draw a bar chart to visualize how the average bill amounts vary across
+different days of the week. One way to do this would be to compute the day-wise 
+averages and then use plt.bar. 
+"""
+bill_avg_df = tips_df.groupby("day", observed=True)[["total_bill"]].mean() 
+""" print(bill_avg_df) 
+plt.figure()
+plt.bar(bill_avg_df.index, bill_avg_df.total_bill)
+ """
+"""
+However, since this is a very common use case, the Seaborn library provides
+a barplot function which can automatically compute averages
+"""  
+""" plt.figure(figsize=(12, 6))
+sns.barplot(x="day", y="total_bill", data=tips_df)  """
+
+"""The lines cutting each bar represents the amount of variation 
+in the values. For instance, it seems like the variation in the total bill 
+was quite high on Fridays, and lower on Saturday. 
+
+We can also specify a hue argument to compare bar plots side-by-side based 
+on a third feature, e.g. sex.
+"""
+plt.figure()
+sns.barplot(x="day", y="total_bill", hue="sex", data=tips_df)  
+
+"""You can make the bars horizontal by simply switching the axes
+"""
+plt.figure()
+sns.barplot(x="total_bill", y="day", hue="sex", data=tips_df)
 plt.show()

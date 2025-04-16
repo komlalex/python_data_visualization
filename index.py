@@ -83,20 +83,43 @@ The plt.plot function supports many arguments for styling lines and markers:
 * markerfacecolor or mfc: set the fill color for markers 
 * alpha: opacity of the plot
 """
-plt.figure()
+""" plt.figure()
 plt.plot(years, apples, marker="o", c="b", ls="-", lw=2, ms=8, mew=2, mec= "navy") 
 plt.plot(years, oranges, marker="x", c="r", ls="--", lw=3, ms=10, alpha=0.5) 
 plt.ylabel("Yield (tons per hectare)")
 plt.xlabel("Year") 
 plt.title("Crop Yields in Kanto")
-plt.legend(["Apples", "Oranges"]) 
+plt.legend(["Apples", "Oranges"])  """
 
 """The fmt argument provies a shorthand for specifying the line style, 
 marker and line color. It can be provided as the third argument
 
 fmt = '[marker][line][color]'
 """
-plt.figure()
+""" plt.figure()
+plt.plot(years, apples, "s-b") 
+plt.plot(years, oranges, "o--r") 
+plt.ylabel("Yield (tons per hectare)")
+plt.xlabel("Year") 
+plt.title("Crop Yields in Kanto")
+plt.legend(["Apples", "Oranges"])  """
+
+
+"""If no line style is specified in the fmt, only markers are drawn""" 
+""" plt.figure()
+plt.plot(years, apples, "or") 
+plt.ylabel("Yield (tons per hectare)")
+plt.xlabel("Year") 
+plt.title("Crop Yields in Kanto")
+plt.legend(["Apples"])  """
+
+"""Improving Default Styles using Seaborn 
+An easy way to make your charts look beautiful is to use default 
+styles provided in the Seaborn library. These can be applied using the 
+sns.set_style function."""
+
+sns.set_style("whitegrid") 
+plt.figure(figsize=(12, 12))
 plt.plot(years, apples, "s-b") 
 plt.plot(years, oranges, "o--r") 
 plt.ylabel("Yield (tons per hectare)")
@@ -104,4 +127,12 @@ plt.xlabel("Year")
 plt.title("Crop Yields in Kanto")
 plt.legend(["Apples", "Oranges"]) 
 
+sns.set_style("darkgrid") 
+plt.figure(figsize=(12, 12))
+plt.plot(years, apples, "s-b") 
+plt.plot(years, oranges, "o--r") 
+plt.ylabel("Yield (tons per hectare)")
+plt.xlabel("Year") 
+plt.title("Crop Yields in Kanto")
+plt.legend(["Apples", "Oranges"])
 plt.show()

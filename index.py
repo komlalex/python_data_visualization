@@ -197,10 +197,51 @@ sns.scatterplot(x=flowers_df.sepal_length, y=flowers_df.sepal_width, hue=flowers
 Seaborn has in-built support for Pandas data frames. Instead of passing each 
 columns as a series, you can also pass column names and use the data
 argument to pass the data frame.""" 
-plt.title("Sepal Dimensions") 
+""" plt.title("Sepal Dimensions") 
 sns.scatterplot(x="sepal_length", 
                 y="sepal_width", 
                 hue="species", 
                 s=100, 
-                data=flowers_df)
+                data=flowers_df)  """ 
+
+"""HISTOGRAM 
+A histogram represents the distribution of data by forming the 
+bins along the range of the data and then drawing bars to show the 
+number of observations that fall in each bin.
+
+As an example, let's visualize how the values of sepal width in the flowers 
+dataset are distributed. We can use the plt.hist function to create a histogram.
+"""
+#flowers_df = sns.load_dataset("iris")  
+print(flowers_df.describe()) 
+
+""" plt.figure(figsize=(12, 6))
+plt.title("Distribution of Sepal Width") 
+plt.hist(flowers_df.sepal_width)  """
+
+"""We can immediately see that the values of sepal width fall in 
+the range 2.0-4.5, and around 35 values are in the range 2.9-3.1, which 
+seems to be the largest bin."""  
+
+
+"""
+Controlling the size of bins 
+We can control the number of bins, or the size of each bin using the bins 
+argument.
+""" 
+""" plt.figure(figsize=(12, 6))
+plt.title("Distribution of Sepal Width") 
+plt.hist(flowers_df.sepal_width, bins=5)  
+ """
+import numpy as np 
+# Specifying the boundaries of each bin 
+plt.figure(figsize=(12, 6))
+plt.title("Distribution of Sepal Width") 
+plt.hist(flowers_df.sepal_width, bins=np.arange(2, 5, 0.25))  
+
+# Bins of unequal size 
+plt.figure(figsize=(12, 6))
+plt.title("Distribution of Sepal Width") 
+plt.hist(flowers_df.sepal_width, bins=[1, 3, 4, 4.5] )
+
 plt.show()

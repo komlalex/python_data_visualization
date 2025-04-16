@@ -332,7 +332,7 @@ We'll use another sample dataset from Seaborn, called "flights" to
 visualize monthly passenger footfall at an airport over 12 years. 
 """
 flights_df  = sns.load_dataset("flights").pivot(index="month", columns="year", values="passengers")
-print(flights_df) 
+#print(flights_df) 
 
 """flights_df is a matrix with one row for each month and one column for 
 each year. The values in the matrix show the number of passengers (in thousands) 
@@ -352,7 +352,81 @@ July & August.
 We can also display the actual values in each block by specifying 
 annot= True, and use the cmpa argument to change the color palet
 """
-plt.figure(figsize=(12, 6))
+""" plt.figure(figsize=(12, 6))
 plt.title("No. of Passengers (1000s)")
-sns.heatmap(flights_df, fmt="d", annot=True, cmap="Blues")
-plt.show()
+sns.heatmap(flights_df, fmt="d", annot=True, cmap="Greens")  """
+
+"""IMAGES 
+Matplotlib can also be used to display images. Llet's download an image from 
+the internet 
+"""
+from urllib.request import urlretrieve  
+from PIL import Image 
+#urlretrieve("https://i.imgur.com/SkPbg.jpg", "chart.jpg")
+
+img = Image.open("charts.jpg")
+
+"""An image loaded using PIL is simply a 3-dimensional numpy array 
+containing pixel intensities for the red, green and blue (RGB) channels of the 
+image. We can convert the image into an array using np.array""" 
+img_array = np.array(img)  
+""" plt.figure()
+plt.imshow(img_array)
+plt.axis(False) 
+plt.grid(False)  """
+
+"""
+Plotting Multiple Charts in a Grid 
+Matplotlib and Seaborn also support plotting multiple charts in a 
+grid, using plt.subplots, which returns a set of axes that can be used for 
+plotting.
+
+Here's a single grid showing the different types of charts we've covered in 
+this tutorial.
+"""
+fig, axes = plt.subplots(2, 3, figsize=(16, 8)) 
+# Use the axes for for plotting 
+axes[0, 0].plot(years, apples, "s-b")
+axes[0, 0].plot(years, oranges, "o--r") 
+axes[0, 0].set_xlabel("Year")
+axes[0, 0].set_ylabel("Yield")
+axes[0, 0].legend(["Apples", "Oranges"])
+axes[0, 0].set_title("Crop  Yields in Kanto") 
+
+# Pass the axes into seaborn 
+
+axes[0, 1].set_title("Sepal Length vs. Sepal Width")
+sns.scatterplot(x=flowers_df.sepal_length, 
+                y=flowers_df.sepal_width, 
+                hue=flowers_df.species, 
+                s=100, 
+                ax=axes[0, 1]) 
+
+#  Use the axes for plotting 
+axes[0, 2].set_title("Distribution for Sepal Width")
+axes[0, 2].hist([setosa_df.sepal_width, versicolor_df.sepal_width, virginica_df.sepal_width], 
+                bins=np.arange(2, 5, 0.25), 
+                stacked=True) 
+axes[0, 2].legend(["Setosa", "Versicolor", "Virginica"]) 
+
+# Pass the axes into seaborn 
+axes[0, 1].set_title("Restaurant Bills")
+sns.barplot(x="day", 
+                y="total_bill", 
+                data=tips_df,
+                hue="sex", 
+                ax=axes[1, 0]
+                )  
+# Pass the axes into seaborn 
+axes[1, 1].set_title("Flight traffic") 
+sns.heatmap(flights_df, cmap="Blues", ax=axes[1, 1]) 
+
+# Plot an image using the axes 
+axes[1, 2].set_title("Data Science Meme") 
+axes[1, 2].imshow(img)
+axes[1, 2].grid(False)
+axes[1, 2].set_xticks([])
+axes[1, 2].set_yticks([]) 
+
+plt.tight_layout(pad=2)
+plt.show() 
